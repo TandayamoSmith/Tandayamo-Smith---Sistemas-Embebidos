@@ -1,0 +1,107 @@
+/*
+ *                   Universidad Tecnica del Norte
+ *         Facultad de Ingenieria en Ciencias Aplicadas
+ *                     Sistemas Embebidos
+ * Capitulo III: MODULOS DE COMUNICACION 
+ * CODIGO 12: Comunicacion I2C 
+ * OBJETIVO: Enviar mensjes desde un master hacia 3 esclavos 
+ * Nombre: TANDAYAMO SMITH
+ * Funciones: 
+ */
+ 
+ /////////////////////////SLAVE 2///////////////////////////////
+ 
+ #include <Wire.h>      //Libreria I2C  
+ 
+ char dato;             //Variable de almacenamiento de datos 
+
+  const int led1=8;      //led1 en pin 8
+ const int led2=9;      //led1 en pin 9
+ const int led3=10;      //led1 en pin 10
+  const int led4=11;      //led1 en pin 11
+ //const int leds[4]={8,9,10,11};
+
+ //int i=0;
+ //int k=0;
+ 
+void setup() {
+  
+  Wire.begin(5);           //Inicia comunicacion I2C
+  Wire.onReceive(receiveEvent); 
+  Serial.begin(9600);      //Inicia comunicacion serial
+  pinMode(led1,OUTPUT);    //Pin 8 como salida
+  pinMode(led2,OUTPUT);    //Pin 9 como salida
+  pinMode(led3,OUTPUT);    //Pin 10 como salida
+  pinMode(led4,OUTPUT);    //Pin 11 como salida
+  
+ /* for(i=0;i<=4;i++){
+    pinMode(leds[i],OUTPUT); //desplazamiento
+    }
+    */
+}
+
+void loop() {
+  delay(100);                     //Tiempo de espera
+}
+
+void receiveEvent(int bytes){
+  while(Wire.available()){
+    dato=Wire.read();
+    /*
+    if(k<1) {
+      k++;
+      for(i=0;i<4;i++){ //Los leds se encienden y apagan secuencialmente
+        digitalWrite(leds[i],HIGH); //Envia 5v en la posicion i
+        delay(300);                 //Se detiene el microcontrolador 
+        digitalWrite(leds[i],LOW);  //Envia 0v en la posicion i
+        delay(300);                 //Se detiene el microcontrolador 
+        }    
+     }
+     */
+     //if(dato=='2'){
+     switch(dato){
+      case '2':
+    digitalWrite(led1,HIGH);
+    delay(1000); 
+    digitalWrite(led2,LOW); 
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW); 
+    delay(9000);
+    digitalWrite(led2,HIGH); 
+    delay(1000);
+    digitalWrite(led1,LOW); 
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW);  
+    delay(9000);
+    digitalWrite(led3,HIGH); 
+    delay(1000);
+    digitalWrite(led1,LOW); 
+    digitalWrite(led2,LOW);
+    digitalWrite(led4,LOW);   
+    delay(9000);
+    digitalWrite(led4,HIGH);
+    delay(1000);
+    digitalWrite(led1,LOW);
+    digitalWrite(led2,LOW);
+    digitalWrite(led3,LOW);
+    delay(9000);
+    digitalWrite(led1,LOW); 
+    digitalWrite(led2,LOW); 
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW); 
+    delay(4000);
+
+    break;
+
+    default:
+
+    digitalWrite(led1,LOW);
+    digitalWrite(led2,LOW);
+    digitalWrite(led3,LOW);
+    digitalWrite(led4,LOW);
+     }
+
+     
+    // }
+  }
+}
