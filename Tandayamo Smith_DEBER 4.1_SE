@@ -1,0 +1,95 @@
+/*
+ *                  Universidad Tecnica del Norte
+ *         Facultad de Ingenieria en Ciencias Aplicadas
+ *                     Sistemas Embebidos
+ * Capitulo IV: PERIFÉRICOS ESPECIALES
+ * CODIGO 14: CAD  y PWM
+ * OBJETIVO: Realizar lecturas del conversor analogico digital para determinar la velocidad de un motor en DC
+ * FUNCIONES: analogRead(conversor)
+ *                       conversor-> A0-05
+ *            analogWrite(pin,dutty)
+ *                        pin-> con ~, dutty->0-255
+ *                        
+ * Nombre: TANDAYAMO SMITH
+ * Curso: 5to Citel 
+ * 
+ */
+
+ #include <LiquidCrystal.h>      //llamar a la libreria
+ LiquidCrystal lcd(13,12,5,4,3,2); //seleccione pines para lCD
+ LiquidCrystal lcd1(A2,A3,9,8,7,6); //seleccione pines para lCD2
+ 
+
+ int conversor;                    //variable para adquirir datos del pin analogo A0-A5
+ int conversor1;                    //variable para adquirir datos del pin analogo A0-A5
+ float voltaje;     //variable de conversion del voltaje
+ float voltaje1;     //variable de conversion del voltaje
+ int dutty;         //variable para uso del PWM
+ int dutty1;         //variable para uso del PWM
+
+ const int boton=A5;  //Declaracion del pin para el boton
+ const int swt=A4;    //Declaracion del pin para el Switch
+ 
+ 
+ 
+void setup() {
+  // put your setup code here, to run once:
+  lcd.begin(16,2);   //inicializa la LCD
+  lcd1.begin(16,2);   //inicializa la LCD2
+  pinMode(boton,INPUT); //Declarar al boton como entrada
+  pinMode(swt,INPUT);  //Declarar al Switch como entrada
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  if(digitalRead(boton)==HIGH){
+  conversor=analogRead(A0); //lectura del canal analogo A0
+  voltaje=(conversor*5.0)/1023.0;  //conversion del voltaje 
+  dutty=conversor/4;     //cambio de escala para el coclo dutty
+  analogWrite(11,dutty);   //envio del valor al pin11 analogo 
+  lcd.setCursor(0,0);    //ubicacion del cursor en la LCD
+  lcd.print("CAD:");     //impresion del mensaje en la LCD
+  lcd.setCursor(5,0);    // ubicacion del cursor en la LCD
+  lcd.print(conversor);
+  lcd.setCursor(0,1);
+  lcd.print("V:");
+  lcd.setCursor(3,1);
+  lcd.print(voltaje);
+  lcd.setCursor(9,1);
+  lcd.print("PWM");
+  lcd.setCursor(13,1);
+  lcd.print((dutty)*100)/255;
+  delay(300);
+  lcd.clear();
+  }else{
+    lcd.clear();
+    }
+
+
+//////////////////////////////LCD2////////////////////////
+
+   if(digitalRead(swt)==HIGH){
+  conversor1=analogRead(A1); //lectura del canal analogo A0
+  voltaje1=(conversor1*5.0)/1023.0;  //conversion del voltaje 
+  dutty1=conversor1/4;     //cambio de escala para el coclo dutty
+  analogWrite(10,dutty1);   //envio del valor al pin11 analogo 
+  lcd1.setCursor(0,0);    //ubicacion del cursor en la LCD
+  lcd1.print("CAD:");     //impresion del mensaje en la LCD
+  lcd1.setCursor(5,0);    // ubicacion del cursor en la LCD
+  lcd1.print(conversor1);
+  lcd1.setCursor(0,1);
+  lcd1.print("V:");
+  lcd1.setCursor(3,1);
+  lcd1.print(voltaje1);
+  lcd1.setCursor(9,1);
+  lcd1.print("PWM");
+  lcd1.setCursor(13,1);
+  lcd1.print((dutty1)*100)/255;
+  delay(300);
+  lcd1.clear();
+  }else{
+    lcd1.clear();
+    }
+}
