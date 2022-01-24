@@ -1,0 +1,63 @@
+/*         Universidad Tecnica del Norte
+     Facultad de Ingenieria en Ciencias Aplicadas 
+     Carrera de Ingenieria en Telecomunicaciones 
+                Sistemas Embebidos
+
+Nombre:Tandayamo Smith
+Curso: 5to Citel 
+Fecha: 23/01/2022
+
+                  Deber 6.2.
+                     Reto2
+*/
+
+int i=250;
+void setup() {
+  size(400, 400);   
+  background(#9b9b9b);   
+  textSize(24);     
+  fill(0);    
+  text("Presione el Botón para ",80,30);
+  text("Encender o Apagar el LED",70,50);
+  smooth();
+  fill(#DA0000);
+  ellipse(200, 200, 250, 250); 
+  textSize(24);  
+  fill(250); 
+  text("!Apagado¡", 150, height/2);
+  text("Tandayamo Smith",25,370);
+}
+
+
+void draw() { 
+  noStroke();
+}
+
+void mouseReleased() {
+  if (mouseButton==RIGHT) {                    
+    fill(#D60000 );
+    ellipse(200, 200, 250, 250);
+    textSize(24);
+    fill(250);
+    text("!Apagado¡", 150, height/2);
+  }
+  if (mouseButton == LEFT) {             
+    fill(#30E82C);
+    ellipse(200, 200, 250, 250);
+    textSize(24);
+    fill(250);
+    text("!Encendido¡", 140, height/2);
+  }
+}
+
+void mousePressed() {                        
+  if (mouseButton==RIGHT) {  
+    fill(#932115);     
+    ellipse(200, 200, 250, 250);  
+  }
+  if (mouseButton == LEFT) {               
+      fill(#099F14);                    
+    ellipse(200, 200, 250, 250);          
+  }
+}
+ 
