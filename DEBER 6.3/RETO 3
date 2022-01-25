@@ -1,0 +1,74 @@
+/*         Universidad Tecnica del Norte
+     Facultad de Ingenieria en Ciencias Aplicadas 
+     Carrera de Ingenieria en Telecomunicaciones 
+                Sistemas Embebidos
+
+Nombre:Tandayamo Smith
+Curso: 5to Citel 
+Fecha: 24/01/2022
+
+                  Deber 6.3
+                  RETO3
+
+ */
+void setup() {
+pinMode(7,INPUT);
+Serial.begin(9600);     //Inicialización de comunicación serial a 9600 baudios
+}
+void loop() {                            
+Serial.println(digitalRead(7));  
+delay(500);
+}
+
+
+////////////////////////////////////////////////////////////////////
+
+/*         Universidad Tecnica del Norte
+     Facultad de Ingenieria en Ciencias Aplicadas 
+     Carrera de Ingenieria en Telecomunicaciones 
+                Sistemas Embebidos
+
+Nombre:Tandayamo Smith
+Curso: 5to Citel 
+Fecha: 23/01/2022
+
+                  Deber 6.3
+                    Reto 3*/
+import cc.arduino.*;
+import org.firmata.*;
+import processing.serial.*;                     
+Serial miPuerto;                              
+void setup() {  
+  size(425, 400);                                                       
+  miPuerto = new Serial(this, "COM1", 9600);    
+}
+void draw() {
+ char dato = miPuerto.readChar();             
+  if (dato=='1')                                
+ {
+    textSize(20); // tamañao del texto 
+    text("                             ",75,30); 
+    fill(#6A6872);
+    stroke(0);
+    rect(75,30,294,35 );
+
+    fill(#00FF00);                               
+    ellipse(215, 225,250, 250);                
+    fill(0);
+    text("El Push Botton No esta precionado", 80, 50);            
+  } else
+  {
+    if (dato=='0')                             
+    {   
+    textSize(20); // tamañao del texto 
+    text("                             ",75,30);
+    fill(#6A6872);
+    stroke(0);
+    rect(75,30,294,35 );
+      fill(#FF0000);                             
+      ellipse(215, 225,250, 250);                
+      fill(0);  
+      text("El Push Botton  esta precionado", 80, 50);        
+    }
+  }
+}
