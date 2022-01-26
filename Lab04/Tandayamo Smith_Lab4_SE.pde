@@ -1,3 +1,16 @@
+/*         Universidad Tecnica del Norte
+     Facultad de Ingenieria en Ciencias Aplicadas 
+     Carrera de Ingenieria en Telecomunicaciones 
+                Sistemas Embebidos
+
+Integrantes: Almeida Katherine
+             Tandayamo Smith
+             Torres Erika
+             
+Curso: 5to Citel 
+Fecha: 26/01/2022
+
+                Laboratorio 04*/
 import processing.serial.*;
 import ddf.minim.*;
 
